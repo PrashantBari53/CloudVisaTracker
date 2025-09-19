@@ -1,0 +1,32 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: root
+    platform: postgres
+    hikari:
+      data-source-properties:
+        wrapperPlugins: iam,failover,efm2
+        iamRegion: eu-west-1
+        iamExpiration: 1320
+      maximumPoolSize: 200
+      minimumIdle: 10
+      maxLifetime: 2000000
+      connectionInitSql: SELECT 1
+      flyway:
+        enabled: false
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        id:
+          new_generator_mappings: false
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
